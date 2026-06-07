@@ -1,0 +1,43 @@
+{
+    "name": "shopping-list",
+    "build": {
+        "dockerfile": "./Dockerfile",
+        "context": ".."
+    },
+    "workspaceFolder": "/workspace",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter",
+                "mechatroner.rainbow-csv",
+                "ms-toolsai.datawrangler",
+                "google.gemini-cli-vscode-ide-companion",
+                "tomoki1207.pdf",
+                "davidanson.vscode-markdownlint",
+                "github.vscode-pull-request-github",
+                "mermaidchart.vscode-mermaid-chart",
+                "pomdtr.excalidraw-editor",
+                "hashicorp.terraform"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath":"/workspace/.venv/bin/python"
+            }
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "mounts": [
+        "source=${localEnv:HOME}/.config/gh,target=/home/vscode/.config/gh,type=bind,consistency=cached"
+    ],
+    "remoteEnv": {
+        "DEEPSEEK_API_KEY": "${localEnv:DEEPSEEK_API_KEY}",
+        "CORTECS_API_KEY": "${localEnv:CORTECS_API_KEY}",
+        "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+    },
+    "postCreateCommand": "python3 -c \"import json, os; home = os.path.expanduser('~'); os.makedirs(os.path.join(home, '.local/share/opencode'), exist_ok=True); json.dump({'deepseek': {'type': 'api', 'key': os.environ['DEEPSEEK_API_KEY']}, 'cortecs': {'type': 'api', 'key': os.environ['CORTECS_API_KEY']}}, open(os.path.join(home, '.local/share/opencode/auth.json'), 'w'))\" && uv sync --group dev --frozen",
+    "forwardPorts": [8888]
+}
