@@ -83,7 +83,6 @@ Returns: `{ title, cuisine, protein, difficulty, source_url, tags, ingredients: 
 ## Project Structure
 
 ```
-shopping-list/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py            # FastAPI app, lifespan, CORS
@@ -92,7 +91,6 @@ shopping-list/
 │   ├── schemas.py         # Pydantic request/response schemas
 │   ├── routers/
 │   │   ├── __init__.py
-│   │   ├── lists.py       # list CRUD endpoints
 │   │   ├── lists.py       # list CRUD + upload-recipe endpoint
 │   │   └── items.py       # item CRUD endpoints
 │   ├── recipe_parser.py   # markdown recipe → structured data
