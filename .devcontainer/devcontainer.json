@@ -31,13 +31,12 @@
         "ghcr.io/devcontainers/features/github-cli:1": {}
     },
     "mounts": [
-        "source=${localEnv:HOME}/.config/gh,target=/home/vscode/.config/gh,type=bind,consistency=cached"
     ],
     "remoteEnv": {
         "DEEPSEEK_API_KEY": "${localEnv:DEEPSEEK_API_KEY}",
         "CORTECS_API_KEY": "${localEnv:CORTECS_API_KEY}",
-        "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+        "GOOGLE_GENERATIVE_AI_API_KEY": "${localEnv:GOOGLE_GENERATIVE_AI_API_KEY}"
     },
-    "postCreateCommand": "python3 -c \"import json, os; home = os.path.expanduser('~'); os.makedirs(os.path.join(home, '.local/share/opencode'), exist_ok=True); json.dump({'deepseek': {'type': 'api', 'key': os.environ['DEEPSEEK_API_KEY']}, 'cortecs': {'type': 'api', 'key': os.environ['CORTECS_API_KEY']}}, open(os.path.join(home, '.local/share/opencode/auth.json'), 'w'))\" && uv sync --group dev --frozen",
+    "postCreateCommand": "bash .devcontainer/post_setup.sh",
     "forwardPorts": [8888]
 }
